@@ -1,0 +1,50 @@
+Create table  Categories (
+Id int Primary key Identity,
+Name nvarchar(50),
+)
+Create table Products(
+Id int Primary key Identity,
+Name nvarchar(50),
+Price decimal(6,2) not null,
+Cost decimal(6,2) not null
+)
+Create table Colors(
+Id int Primary key Identity,
+Name nvarchar(50)
+
+)
+Alter Table Products
+Add CategoriesId int foreign key references Categories(Id)
+
+Create table ProductsColors(
+Id int Primary key Identity,
+ProductsId int references Products(Id),
+ColorsId int references Colors(Id),
+)
+Insert into Categories
+Values('Paltar'),
+('Oyuncaq')
+
+Insert into Products
+Values('Koynek',15.00,10.00,1),
+('Top',8.00,5.00,2),
+('Papaq',7.50,4.50,1)
+Insert into Colors
+Values('yasil'),
+('sari'),
+('qirmizi')
+
+Insert into ProductsColors 
+Values(1,1),(1,2),(1,3),
+(2,1),(2,2),(2,3),
+(3,1),(3,2),(3,3)
+
+select Products.Name,Products.Price ,Products .Cost,s.Name [Catagory Name], c .Name as[Color name]  from Products
+inner join Categories as s
+on  Products.Id=s.Id
+join ProductsColors as PC
+on PC.ProductsId = Products .Id
+join Colors as c
+on c.Id=PC.ColorsId 
+select * from products
+select * from colors

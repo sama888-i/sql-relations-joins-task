@@ -1,0 +1,24 @@
+create table Users (
+Id int primary key,
+UserName nvarchar(50),
+Password nvarchar(50)
+)
+create table Roles(
+Name nvarchar(50),
+UserId int foreign key references Users(Id)
+
+)
+insert into Users
+Values (1,'I.Sema','sema1234'),
+(2,'I.Cevahir','cev777'),
+(3,'I.Mikayil','6mikayil6'),
+(4,'I.Mehmet','mehmet1309')
+insert into Roles
+Values ('Director',1),
+('Producer',4),
+('Operator',3),
+('Editor',2)
+
+select Users.UserName as[Users], Roles.Name as[Roles] from Roles
+inner join Users
+on Roles.UserID=Users.ID
